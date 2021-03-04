@@ -26,19 +26,19 @@ export default {
   name: "ShoppingCart",
 
   computed: {
-    ...mapGetters({
+    ...mapGetters("cart", {
       products: "cartProducts",
 
       cartTotal: "cartTotal",
     }),
 
-    ...mapState({
-      checkoutStatus: "checkoutStatus",
+    ...mapState("cart", {
+      checkoutStatus: (state) => state.checkoutStatus,
     }),
   },
 
   methods: {
-    ...mapActions({
+    ...mapActions("cart", {
       checkout: "checkout",
     }),
   },

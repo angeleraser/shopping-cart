@@ -10,7 +10,7 @@
           `${product.title} - ${product.price} Items left: ${product.inventory}`
         }}
         <button
-          :disabled="productsInStock(product.id)"
+          :disabled="!productInStock(product.id)"
           @click="addProductToCart(product)"
         >
           Add product to cart
@@ -43,20 +43,20 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      allproducts: "products",
+    ...mapState("products", {
+      allproducts: ({ items }) => items,
     }),
 
-    ...mapGetters({
-      productsInStock: "productsInStock",
+    ...mapGetters("products", {
+      productInStock: "productInStock",
     }),
   },
 
   methods: {
     ...mapActions({
-      getProducts: "fetchProducts",
+      addProductToCart: "cart/addProductToCart",
 
-      addProductToCart: "addProductToCart",
+      getProducts: "products/fetchProducts",
     }),
   },
 };
